@@ -7,4 +7,7 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 ## Usage
 1) Download data into "data/" directory or use already available data
 2) If using your own data, convert it into the same format as of provided data 
-3) python train.py <path_to_training_file> <path_to_test_file>
+3) Download Pre-trained word embeddings (Glove/Word2Vec) into "data/" directory
+4) run following command:
+
+python train.py <path_to_training_file> <path_to_test_file>
