@@ -1,6 +1,7 @@
-# Implementation of fastText model proposed in [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)
+# fastText Model
+- Implementation of fastText as proposed in [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)
 
-# Details
+## Implementation Details
 - We used pre-trained Glove Embeddings for encoding words
 - Average word embeddings to get sentence embeddings
 - Use one hidden layer with 10 hidden units (as described in original paper)
@@ -8,4 +9,5 @@
 - Negative Log-Likelihood loss is used
 - Used SGD for training
 
-![Architecture of fastText](/images/fastText.jpg)
+## Model Architecture
+![Alt Text](/images/fastText.jpg)
