@@ -15,7 +15,7 @@ from sklearn.metrics import accuracy_score
 def get_accuracy(model, test_x, test_y):
     all_preds = []
     test_iterator = data_iterator(test_x, test_y)
-    for x, y in test_iterator():
+    for x, y in test_iterator:
         x = Variable(Tensor(x))
         y_pred = model(x.cuda())
         predicted = torch.max(y_pred.cpu().data, 1)[1] + 1

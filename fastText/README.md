@@ -1,0 +1,8 @@
+# Implementation of fastText model proposed in [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)
+
+# Details
+- We used pre-trained Glove Embeddings for encoding words
+- Average word embeddings to get sentence embeddings
+- Use one hidden layer with 10 hidden units (as described in original paper)
+- Feed the output of this layer to a linear classifier
+- Use Softmax non-linearity to compute probabilities
