@@ -10,4 +10,4 @@
 - Used SGD for training
 
 ## Model Architecture
-![Alt Text](/images/fastText.jpg)
+![fastText Architecture](/images/fastText.jpg)
