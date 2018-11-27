@@ -1,5 +1,7 @@
 # fastText Model
-- Implementation of fastText as proposed in [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)
+- This is the implementation of fastText as proposed in [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)
+
+*fastText* is a simple, and yet very powerful model for text classification, proposed by Facebook research. It is one of the fastest text classification models, which given comparable performance to much complex neural network based models.
 
 ## Implementation Details
 - We used pre-trained Glove Embeddings for encoding words
@@ -10,4 +12,4 @@
 - Used SGD for training
 
 ## Model Architecture
-![fastText Architecture](images/fastText.jpg)
+![fastText Architecture](images/fastText.png)
