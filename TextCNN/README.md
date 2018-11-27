@@ -4,7 +4,7 @@ This is the implementation of Convolutional Neural Network for text classificati
 CNN has a lot of success applications in the field of Computer Vision. CNNs have recently been successfully applied to NLP problems as well. Text classification is one such problem.
 
 ## Model Architecture
-![CNNText Architecture](images/TextCNN.jpg)
+![CNNText Architecture](images/TextCNN.png)
 
 ## Implementation Details
 - Since sentence lengths vary for different sentences, zero pad/truncate each sentence to have length n
