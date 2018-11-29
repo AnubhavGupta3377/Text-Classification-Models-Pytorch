@@ -4,6 +4,7 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 ## Current Model Implementations
 - **fastText:** fastText Model from [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)
 - **TextCNN:** CNN for text classification proposed in [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)
+- **TextRNN:** Bi-direction LSTM network for text classification
 
 ## Usage
 1) Download data into "data/" directory or use already available data
@@ -19,4 +20,5 @@ python train.py <path_to_training_file> <path_to_test_file>
 | --- | --- | --- |
 | |AG_News|Query_Well_formedness|
 | fastText | 89.46 | |
-| TextCNN | 88.57 |
+| TextCNN | 88.57 | |
+| TextRNN | 88.07 | |
