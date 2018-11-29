@@ -6,6 +6,9 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 - **TextCNN:** CNN for text classification proposed in [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)
 - **TextRNN:** Bi-direction LSTM network for text classification
 
+## Upcoming Models
+- **RCNN:** Implementation of RCNN Model proposed in [Recurrent Convolutional Neural Networks for Text Classification](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/download/9745/9552)
+
 ## Usage
 1) Download data into "data/" directory or use already available data
 2) If using your own data, convert it into the same format as of provided data 
@@ -16,6 +19,17 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 python train.py <path_to_training_file> <path_to_test_file>
 
 ## Model Performance
+<table>
+  <tr>
+    <td>One</td>
+    <td>Two</td>
+  </tr>
+  <tr>
+    <td colspan="2">Three</td>
+  </tr>
+</table>
+
+
 | Model || Dataset|
 | --- | --- | --- |
 | |AG_News|Query_Well_formedness|
