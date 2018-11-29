@@ -1,19 +1,18 @@
-# CNNText Model
-This is the implementation of Convolutional Neural Network for text classification as proposed in the paper [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)
+# TextRNN (BiLSTM) Model
+Here, we have implemented a Bi-directional Long Short Term Memory network in PyTorch.
 
-CNN has a lot of success applications in the field of Computer Vision. CNNs have recently been successfully applied to NLP problems as well. Text classification is one such problem.
+LSTMs have been very popular for solving text classification problems due to their theoretical property to capture the entire context while representing a sentence.
 
 ## Model Architecture
-![CNNText Architecture](images/TextCNN.png)
+The architecture of Bi-directional LSTM is as follows:
+
+![TextRNN Architecture](images/BiLSTM.jpg)
 
 ## Implementation Details
-- Since sentence lengths vary for different sentences, zero pad/truncate each sentence to have length n
-- Represent every sentence/text by a 2D tensor of shape (n,d), where d is dimensionality of word vectors
-- Used pre-trained Glove Embeddings for encoding words
-- Used 3 different filter windows of sizes 3,4,5
-- Used 100 feature maps for above windows sizes
-- ReLU activaion function
-- Max-pooling
-- Dropout with keep probability 0.6
+- Considered sequences of length 20
+- Used pre-trained Glove Embeddings for initializing word vectors
+- 2 Layers of BiLSTM
+- Used 32 hidden units within each BiLSTM layer
+- Dropout with keep probability 0.8
 - Optimizer - Stochastic Gradient Descent
 - Loss function - Negative Log Likelihood

@@ -2,64 +2,45 @@
 
 import torch
 from torch import nn
-from torch import Tensor
-from torch.autograd import Variable
 import numpy as np
-from sklearn.metrics import accuracy_score
+from utils import *
 
-class CNNText(nn.Module):
-    def __init__(self, config):
-        super(CNNText, self).__init__()
+class TextRNN(nn.Module):
+    def __init__(self, config, vocab_size, word_embeddings):
+        super(TextRNN, self).__init__()
         self.config = config
         
-        # Convolutional Layer
-        # We use 3 kernels as in original paper
-        # Size of kernels: (3,300),(4,300),(5,300)
+        # Embedding Layer
+        self.embeddings = nn.Embedding(vocab_size, self.config.embed_size)
+        self.embeddings.weight = nn.Parameter(word_embeddings, requires_grad=False)
         
-        self.conv1 = nn.Conv2d(in_channels=self.config.in_channels, out_channels=self.config.num_channels,
-                               kernel_size=(self.config.kernel_size[0],self.config.embed_size),
-                               stride=1, padding=0)
-        self.activation1 = nn.ReLU()
-        self.max_out1 = nn.MaxPool1d(self.config.max_sen_len - self.config.kernel_size[0]+1)
-
-        self.conv2 = nn.Conv2d(in_channels=self.config.in_channels, out_channels=self.config.num_channels,
-                               kernel_size=(self.config.kernel_size[1],self.config.embed_size),
-                               stride=1, padding=0)
-        self.activation2 = nn.ReLU()
-        self.max_out2 = nn.MaxPool1d(self.config.max_sen_len - self.config.kernel_size[1]+1)
-        
-        self.conv3 = nn.Conv2d(in_channels=self.config.in_channels, out_channels=self.config.num_channels,
-                               kernel_size=(self.config.kernel_size[2],self.config.embed_size),
-                               stride=1, padding=0)
-        self.activation3 = nn.ReLU()
-        self.max_out3 = nn.MaxPool1d(self.config.max_sen_len - self.config.kernel_size[2]+1)
+        self.lstm = nn.LSTM(input_size = self.config.embed_size,
+                            hidden_size = self.config.hidden_size,
+                            num_layers = self.config.hidden_layers,
+                            dropout = self.config.dropout_keep,
+                            bidirectional = self.config.bidirectional)
         
         self.dropout = nn.Dropout(self.config.dropout_keep)
         
         # Fully-Connected Layer
-        self.fc = nn.Linear(self.config.num_channels*len(self.config.kernel_size), self.config.output_size)
+        self.fc = nn.Linear(
+            self.config.hidden_size * self.config.hidden_layers * (1+self.config.bidirectional),
+            self.config.output_size
+        )
         
         # Softmax non-linearity
         self.softmax = nn.Softmax()
         
     def forward(self, x):
-        x = x.unsqueeze(1) # (batch_size,max_seq_len,embed_size) => (batch_size,1,max_seq_len,embed_size)
+        # x.shape = (max_sen_len, batch_size)
+        embedded_sent = self.embeddings(x)
+        # embedded_sent.shape = (max_sen_len=20, batch_size=64,embed_size=300)
+
+        lstm_out, (h_n,c_n) = self.lstm(embedded_sent)
+        final_feature_map = self.dropout(h_n) # shape=(num_layers * num_directions, 64, hidden_size)
         
-        conv_out1 = self.conv1(x).squeeze(3)
-        activation_out1 = self.activation1(conv_out1)
-        max_out1 = self.max_out1(activation_out1).squeeze(2)
-        
-        conv_out2 = self.conv2(x).squeeze(3)
-        activation_out2 = self.activation2(conv_out2)
-        max_out2 = self.max_out2(activation_out2).squeeze(2)
-        
-        conv_out3 = self.conv3(x).squeeze(3)
-        activation_out3 = self.activation3(conv_out3)
-        max_out3 = self.max_out3(activation_out3).squeeze(2)
-        
-        all_out = torch.cat((max_out1, max_out2, max_out3), 1)
-        
-        final_feature_map = self.dropout(all_out)
+        # Convert input to (64, hidden_size * hidden_layers * num_directions) for linear layer
+        final_feature_map = torch.cat([final_feature_map[i,:,:] for i in range(final_feature_map.shape[0])], dim=1)
         final_out = self.fc(final_feature_map)
         return self.softmax(final_out)
     
@@ -69,26 +50,31 @@ class CNNText(nn.Module):
     def add_loss_op(self, loss_op):
         self.loss_op = loss_op
     
-    def run_epoch(self, train_data, val_data):
-        train_x, train_y = train_data[0], train_data[1]
-        val_x, val_y = val_data[0], val_data[1]
-        iterator = data_iterator(train_x, train_y, self.config.batch_size)
+    def reduce_lr(self):
+        print("Reducing LR")
+        for g in self.optimizer.param_groups:
+            g['lr'] = g['lr'] / 2
+                
+    def run_epoch(self, train_iterator, val_iterator, epoch):
         train_losses = []
         val_accuracies = []
         losses = []
-    
-        for i, (x,y) in enumerate(iterator):
+        
+        # Reduce learning rate as number of epochs increase
+        if (epoch == int(self.config.max_epochs/3)) or (epoch == int(2*self.config.max_epochs/3)):
+            self.reduce_lr()
+            
+        for i, batch in enumerate(train_iterator):
             self.optimizer.zero_grad()
-    
-            x = Tensor(x).cuda()
+            x = batch.text.cuda()
+            y = (batch.label - 1).type(torch.cuda.LongTensor)
             y_pred = self.__call__(x)
-            loss = self.loss_op(y_pred, torch.cuda.LongTensor(y-1))
+            loss = self.loss_op(y_pred, y)
             loss.backward()
-    
             losses.append(loss.data.cpu().numpy())
             self.optimizer.step()
     
-            if (i + 1) % 50 == 0:
+            if i % 100 == 0:
                 print("Iter: {}".format(i+1))
                 avg_train_loss = np.mean(losses)
                 train_losses.append(avg_train_loss)
@@ -96,17 +82,8 @@ class CNNText(nn.Module):
                 losses = []
                 
                 # Evalute Accuracy on validation set
-                self.eval()
-                all_preds = []
-                val_iterator = data_iterator(val_x, val_y, self.config.batch_size)
-                for j, (x,y) in enumerate(val_iterator):
-                    x = Variable(Tensor(x))
-                    y_pred = self.__call__(x.cuda())
-                    predicted = torch.max(y_pred.cpu().data, 1)[1] + 1
-                    all_preds.extend(predicted.numpy())
-                score = accuracy_score(val_y, np.array(all_preds).flatten())
-                val_accuracies.append(score)
-                print("\tVal Accuracy: {:.4f}".format(score))
+                val_accuracy = evaluate_model(self, val_iterator)
+                print("\tVal Accuracy: {:.4f}".format(val_accuracy))
                 self.train()
                 
         return train_losses, val_accuracies
