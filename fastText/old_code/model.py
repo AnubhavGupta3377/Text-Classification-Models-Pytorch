@@ -2,17 +2,15 @@
 
 import torch
 from torch import nn
+from torch import Tensor
+from torch.autograd import Variable
 import numpy as np
-from utils import *
+from sklearn.metrics import accuracy_score
 
 class fastText(nn.Module):
-    def __init__(self, config, vocab_size, word_embeddings):
+    def __init__(self, config):
         super(fastText, self).__init__()
         self.config = config
-        
-        # Embedding Layer
-        self.embeddings = nn.Embedding(vocab_size, self.config.embed_size)
-        self.embeddings.weight = nn.Parameter(word_embeddings, requires_grad=False)
         
         # Hidden Layer
         self.fc1 = nn.Linear(self.config.embed_size, self.config.hidden_size)
@@ -24,8 +22,7 @@ class fastText(nn.Module):
         self.softmax = nn.Softmax()
         
     def forward(self, x):
-        embedded_sent = self.embeddings(x).permute(1,0,2)
-        h = self.fc1(embedded_sent.mean(1))
+        h = self.fc1(x)
         z = self.fc2(h)
         return self.softmax(z)
     
@@ -35,31 +32,26 @@ class fastText(nn.Module):
     def add_loss_op(self, loss_op):
         self.loss_op = loss_op
     
-    def reduce_lr(self):
-        print("Reducing LR")
-        for g in self.optimizer.param_groups:
-            g['lr'] = g['lr'] / 2
-                
-    def run_epoch(self, train_iterator, val_iterator, epoch):
+    def run_epoch(self, train_data, val_data):
+        train_x, train_y = train_data[0], train_data[1]
+        val_x, val_y = val_data[0], val_data[1]
+        iterator = data_iterator(train_x, train_y, self.config.batch_size)
         train_losses = []
         val_accuracies = []
         losses = []
-        
-        # Reduce learning rate as number of epochs increase
-        if (epoch == int(self.config.max_epochs/3)) or (epoch == int(2*self.config.max_epochs/3)):
-            self.reduce_lr()
-            
-        for i, batch in enumerate(train_iterator):
+    
+        for i, (x,y) in enumerate(iterator):
             self.optimizer.zero_grad()
-            x = batch.text.cuda()
-            y = (batch.label - 1).type(torch.cuda.LongTensor)
+    
+            x = Tensor(x).cuda()
             y_pred = self.__call__(x)
-            loss = self.loss_op(y_pred, y)
+            loss = self.loss_op(y_pred, torch.cuda.LongTensor(y-1))
             loss.backward()
+    
             losses.append(loss.data.cpu().numpy())
             self.optimizer.step()
     
-            if i % 100 == 0:
+            if (i + 1) % 50 == 0:
                 print("Iter: {}".format(i+1))
                 avg_train_loss = np.mean(losses)
                 train_losses.append(avg_train_loss)
@@ -67,8 +59,17 @@ class fastText(nn.Module):
                 losses = []
                 
                 # Evalute Accuracy on validation set
-                val_accuracy = evaluate_model(self, val_iterator)
-                print("\tVal Accuracy: {:.4f}".format(val_accuracy))
+                self.eval()
+                all_preds = []
+                val_iterator = data_iterator(val_x, val_y, self.config.batch_size)
+                for x, y in val_iterator:
+                    x = Variable(Tensor(x))
+                    y_pred = self.__call__(x.cuda())
+                    predicted = torch.max(y_pred.cpu().data, 1)[1] + 1
+                    all_preds.extend(predicted.numpy())
+                score = accuracy_score(val_y, np.array(all_preds).flatten())
+                val_accuracies.append(score)
+                print("\tVal Accuracy: {:.4f}".format(score))
                 self.train()
                 
         return train_losses, val_accuracies

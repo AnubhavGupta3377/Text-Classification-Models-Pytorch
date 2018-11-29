@@ -19,4 +19,4 @@ python train.py <path_to_training_file> <path_to_test_file>
 | --- | --- | --- |
 | |AG_News|Query_Well_formedness|
 | fastText | 89.46 | |
-| TextCNN |  |
+| TextCNN | 88.57 |
