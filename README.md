@@ -13,3 +13,10 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 5) run following command:
 
 python train.py <path_to_training_file> <path_to_test_file>
+
+## Model Performance
+| Model | Dataset|
+| --- | --- |
+| |AG_News|Query_Well_formedness|
+| fastText | 89.46 | |
+| TextCNN |  |
