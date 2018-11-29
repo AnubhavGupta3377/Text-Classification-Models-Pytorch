@@ -21,18 +21,27 @@ python train.py <path_to_training_file> <path_to_test_file>
 ## Model Performance
 <table>
   <tr>
-    <td>One</td>
-    <td>Two</td>
+    <td>Model</td>
+    <td colspan="2">Dataset</td>
   </tr>
   <tr>
-    <td colspan="2">Three</td>
+    <td></td>
+    <td>AG_News</td>
+    <td>Query_Well_formedness</td>
+  </tr>
+  <tr>
+    <td>fastText</td>
+    <td>89.46</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>TextCNN</td>
+    <td>88.57</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>TextRNN</td>
+    <td>88.07 (Sequence length = 20) <br/> 90.16 (Flexible sequence length)</td>
+    <td></td>
   </tr>
 </table>
-
-
-| Model || Dataset|
-| --- | --- | --- |
-| |AG_News|Query_Well_formedness|
-| fastText | 89.46 | |
-| TextCNN | 88.57 | |
-| TextRNN | 88.07 (Sequence length = 20) <br/> 90.16 (Flexible sequence length) | |
