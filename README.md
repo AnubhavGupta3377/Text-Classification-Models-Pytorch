@@ -18,6 +18,7 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 - Spacy-2.0.13
 - Pytorch-0.4.1.post2
 - Torchtext-0.3.1
+
 **Note** - Current implementations are GPU based. With small change in variable usage, can be made to work with CPU.
 
 ## Usage
