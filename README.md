@@ -27,8 +27,8 @@ python train.py <path_to_training_file> <path_to_test_file>
 
 <table>
   <tr>
-    <td>Model</td>
-    <td colspan="4">Dataset</td>
+    <td rowspan="3">Model</td>
+    <td align="center" colspan="4">Dataset</td>
   </tr>
   <tr>
     <td></td>
