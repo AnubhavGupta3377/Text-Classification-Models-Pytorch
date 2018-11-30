@@ -66,8 +66,12 @@ class TextRNN(nn.Module):
             
         for i, batch in enumerate(train_iterator):
             self.optimizer.zero_grad()
-            x = batch.text.cuda()
-            y = (batch.label - 1).type(torch.cuda.LongTensor)
+            if torch.cuda.is_available():
+                x = batch.text.cuda()
+                y = (batch.label - 1).type(torch.cuda.LongTensor)
+            else:
+                x = batch.text
+                y = (batch.label - 1).type(torch.LongTensor)
             y_pred = self.__call__(x)
             loss = self.loss_op(y_pred, y)
             loss.backward()

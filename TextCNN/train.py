@@ -6,6 +6,7 @@ from config import Config
 import sys
 import torch.optim as optim
 from torch import nn
+import torch
 
 if __name__=='__main__':
     config = Config()
@@ -24,7 +25,8 @@ if __name__=='__main__':
     # Create Model with specified optimizer and loss function
     ##############################################################
     model = TextCNN(config, len(dataset.vocab), dataset.word_embeddings)
-    model.cuda()
+    if torch.cuda.is_available():
+        model.cuda()
     model.train()
     optimizer = optim.SGD(model.parameters(), lr=config.lr)
     NLLLoss = nn.NLLLoss()

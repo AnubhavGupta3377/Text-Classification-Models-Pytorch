@@ -105,8 +105,11 @@ def evaluate_model(model, iterator):
     all_preds = []
     all_y = []
     for idx,batch in enumerate(iterator):
-        x = batch.text.cuda()
-        y_pred = model(x.cuda())
+        if torch.cuda.is_available():
+            x = batch.text.cuda()
+        else:
+            x = batch.text
+        y_pred = model(x)
         predicted = torch.max(y_pred.cpu().data, 1)[1] + 1
         all_preds.extend(predicted.numpy())
         all_y.extend(batch.label.numpy())
