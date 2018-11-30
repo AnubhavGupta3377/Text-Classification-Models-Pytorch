@@ -21,7 +21,10 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 python train.py <path_to_training_file> <path_to_test_file>
 
 ## Model Performance
-All the models were run on a 14GB machine with 2 Cores and one NVIDIA Tesla K80 GPU.
+- All the models were run on a 14GB machine with 2 Cores and one NVIDIA Tesla K80 GPU.
+- Runtime in the table below includes the time to load and process the data and running the model.
+- Model parameters are not tuned. So, better performance can be achieved by some parameter tuning.
+
 <table>
   <tr>
     <td>Model</td>
