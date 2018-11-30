@@ -9,10 +9,10 @@ The architecture of Bi-directional LSTM is as follows:
 ![TextRNN Architecture](images/BiLSTM.JPG)
 
 ## Implementation Details
-- Considered sequences of length 20
 - Used pre-trained Glove Embeddings for initializing word vectors
 - 2 Layers of BiLSTM
 - Used 32 hidden units within each BiLSTM layer
 - Dropout with keep probability 0.8
 - Optimizer - Stochastic Gradient Descent
 - Loss function - Negative Log Likelihood
+- Experimented with flexible sequence lengths and sequences of length 20
