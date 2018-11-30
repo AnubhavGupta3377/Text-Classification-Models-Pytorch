@@ -6,7 +6,7 @@ LSTMs have been very popular for solving text classification problems due to the
 ## Model Architecture
 The architecture of Bi-directional LSTM is as follows:
 
-![TextRNN Architecture](images/BiLSTM.jpg)
+![TextRNN Architecture](images/BiLSTM.JPG)
 
 ## Implementation Details
 - Considered sequences of length 20
