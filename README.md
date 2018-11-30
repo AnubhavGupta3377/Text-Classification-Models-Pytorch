@@ -56,7 +56,7 @@ All the models were run on a 14GB machine with 2 Cores and one NVIDIA Tesla K80 
   <tr>
     <td>TextRNN</td>
     <td>88.07 (Sequence length = 20) <br/> 90.16 (Flexible sequence length)</td>
-    <td>21.5 Mins(Sequence length = 20) <br/> 36.8 Mins (Flexible sequence length)</td>
+    <td>21.5 Mins <br/> 36.8 Mins</td>
     <td></td>
     <td></td>
   </tr>
