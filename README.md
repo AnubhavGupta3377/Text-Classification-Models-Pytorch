@@ -19,8 +19,6 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 - Pytorch-0.4.1.post2
 - Torchtext-0.3.1
 
-**Note** - Current implementations are GPU based. With small change in variable usage, can be made to work with CPU.
-
 ## Usage
 1) Download data into "data/" directory or use already available data
 2) If using your own data, convert it into the same format as of provided data 
