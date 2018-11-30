@@ -11,6 +11,14 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 - **Seq2seq With Attention:** Implementation of seq2seq model with attention from [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf)
 - **Hierarchical Attention:**: Implementation of hierarchical attention model for text classification as proposed in [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf)
 
+## Requirements
+- Python-3.5.0
+- Pandas-0.23.4
+- Numpy-1.15.2
+- Spacy-2.0.13
+- Pytorch-0.4.1.post2
+- Torchtext-0.3.1
+
 ## Usage
 1) Download data into "data/" directory or use already available data
 2) If using your own data, convert it into the same format as of provided data 
