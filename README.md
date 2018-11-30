@@ -21,29 +21,43 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 python train.py <path_to_training_file> <path_to_test_file>
 
 ## Model Performance
+All the models were run on a 14GB machine with 2 Cores and one NVIDIA Tesla K80 GPU.
 <table>
   <tr>
     <td>Model</td>
-    <td colspan="2">Dataset</td>
+    <td colspan="4">Dataset</td>
   </tr>
   <tr>
     <td></td>
-    <td>AG_News</td>
-    <td>Query_Well_formedness</td>
+    <td colspan="2">AG_News</td>
+    <td colspan="2">Query_Well_formedness</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Accuracy </td>
+    <td>Runtime </td>
+    <td>Accuracy </td>
+    <td>Runtime </td>
   </tr>
   <tr>
     <td>fastText</td>
     <td>89.46</td>
+    <td>16.0 Mins</td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
     <td>TextCNN</td>
     <td>88.57</td>
+    <td>17.2 Mins</td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
     <td>TextRNN</td>
     <td>88.07 (Sequence length = 20) <br/> 90.16 (Flexible sequence length)</td>
+    <td>21.5 Mins(Sequence length = 20) <br/> 36.8 Mins (Flexible sequence length)</td>
+    <td></td>
     <td></td>
   </tr>
 </table>
