@@ -9,7 +9,8 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 
 ## Upcoming Models
 - **RCNN:** Implementation of RCNN Model proposed in [Recurrent Convolutional Neural Networks for Text Classification](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/download/9745/9552)
-- **Hierarchical Attention:**: Implementation of hierarchical attention model for text classification as proposed in [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf)
+- **Hierarchical Attention:** Implementation of hierarchical attention model for text classification as proposed in [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf)
+- **Transformer:** Implementation of Transformer model proposed in [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
 ## Requirements
 - Python-3.5.0
