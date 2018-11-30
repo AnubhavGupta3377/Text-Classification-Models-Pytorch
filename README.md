@@ -31,12 +31,10 @@ python train.py <path_to_training_file> <path_to_test_file>
     <td align="center" colspan="4">Dataset</td>
   </tr>
   <tr>
-    <td></td>
     <td colspan="2">AG_News</td>
     <td colspan="2">Query_Well_formedness</td>
   </tr>
   <tr>
-    <td></td>
     <td>Accuracy </td>
     <td>Runtime </td>
     <td>Accuracy </td>
