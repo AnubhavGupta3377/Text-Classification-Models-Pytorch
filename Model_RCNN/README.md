@@ -1,5 +1,5 @@
 # RCNN Model
-Here, we have implemented Recurrent Convolutional Neural Network model for text classification, as proposed in the paper [Recurrent Convolutional Neural Networks for Text Classification](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/download/9745/9552)
+Here, we have implemented Recurrent Convolutional Neural Network model for text classification, as proposed in the paper [Recurrent Convolutional Neural Networks for Text Classification](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/download/9745/9552).
 
 Traditional RNNs have shown very promising results in text classification, due to the fact that they can capture contextual information while representing the sentence by fixed size vector. However, this representation is often biased, as words appearing later in the sentence/document are more dominent than the earlier words. Thus, some semantic information about the sentence might get lost, if earlier part of sentence contains some key components.
 
