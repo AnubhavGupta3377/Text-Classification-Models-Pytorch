@@ -34,6 +34,61 @@ python train.py <path_to_training_file> <path_to_test_file>
 - Runtime in the table below includes the time to load and process the data and running the model.
 - Model parameters are not tuned. So, better performance can be achieved by some parameter tuning.
 
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-uys7{border-color:inherit;text-align:center}
+.tg .tg-abip{background-color:#f9f9f9;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-btxf{background-color:#f9f9f9;border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-uys7" rowspan="3"><span style="font-weight:bold">Model</span></th>
+    <th class="tg-c3ow" colspan="4"><span style="font-weight:bold">Dataset</span></th>
+  </tr>
+  <tr>
+    <td class="tg-abip" colspan="2"><span style="font-weight:bold">AG_News</span></td>
+    <td class="tg-abip" colspan="2"><span style="font-weight:bold">Query_Well_formedness</span></td>
+  </tr>
+  <tr>
+    <td class="tg-abip"><span style="font-weight:bold">Accuracy (%)</span></td>
+    <td class="tg-c3ow"><span style="font-weight:bold">Runtime</span></td>
+    <td class="tg-abip"><span style="font-weight:bold">Accuracy (%)</span></td>
+    <td class="tg-c3ow"><span style="font-weight:bold">Runtime</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-weight:bold">fastText</span></td>
+    <td class="tg-btxf">89.46</td>
+    <td class="tg-0pky">16.0 Mins</td>
+    <td class="tg-btxf"></td>
+    <td class="tg-0pky"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-weight:bold">TextCNN</span></td>
+    <td class="tg-btxf">88.57</td>
+    <td class="tg-0pky">17.2 Mins</td>
+    <td class="tg-btxf"></td>
+    <td class="tg-0pky"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-weight:bold">TextRNN</span><br></td>
+    <td class="tg-btxf">88.07 (Sequence length = 20)<br><br>90.43 (Flexible sequence length)<br></td>
+    <td class="tg-0pky">21.5 Mins<br><br>36.8 Mins<br></td>
+    <td class="tg-btxf"></td>
+    <td class="tg-0pky"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-weight:bold">Seq2Seq_Attention</span></td>
+    <td class="tg-btxf">90.26</td>
+    <td class="tg-0pky">19.10 Mins</td>
+    <td class="tg-btxf"></td>
+    <td class="tg-0pky"></td>
+  </tr>
+</table>
+
 <table>
   <tr>
     <td rowspan="3">Model</td>
