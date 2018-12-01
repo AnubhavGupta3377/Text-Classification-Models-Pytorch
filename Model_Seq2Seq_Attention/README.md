@@ -1,5 +1,5 @@
-# TextRNN (BiLSTM) Model
-Implementation of Seq2Seq model with attention mechanism.
+# Seq2Seq Model with Attention Mechanism
+Implementation of Seq2Seq model with attention mechanism from [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf), [Text Classification Research with Attention-based Recurrent Neural Networks](http://univagora.ro/jour/index.php/ijccc/article/download/3142/pdf)
 
 Seq2Seq models have been widely used in problems such as machine translation, document summarization due to their capability to generate new sequence based on the already seen data. Here, we have implemented Seq2Seq model for text classification task.
 
