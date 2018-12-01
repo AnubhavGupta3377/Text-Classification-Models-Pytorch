@@ -70,4 +70,11 @@ python train.py <path_to_training_file> <path_to_test_file>
     <td></td>
     <td></td>
   </tr>
+  <tr>
+    <td>Seq2Seq_Attention</td>
+    <td>90.26</td>
+    <td>19.10 Mins</td>
+    <td></td>
+    <td></td>
+  </tr>
 </table>
