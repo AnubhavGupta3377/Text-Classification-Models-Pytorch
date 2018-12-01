@@ -10,7 +10,7 @@ Then, max-pooling is applied to determine which features are important for the c
 
 Bi-directional RNN is applied to find the left (*l_i*) and right (*r_i*) context for every word w_i. Then, these three are concatenated to represent a word. i.e.
 
-*x_i* = [*l_i;e_i;r_i*]
+*x_i* = [*l_i ; e_i ; r_i*]
 
 These word representation are, then passed trough a linear layer and tanh activation to get new representations in dimension **h**. Finally max-pooling is performed on these **h**-dimensional vectors (elementwise) to get the final **h**-dimensional feature map.
 This feature map is passed through a linear layer and softmax activation to make the classification.
