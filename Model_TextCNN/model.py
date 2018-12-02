@@ -14,25 +14,23 @@ class TextCNN(nn.Module):
         self.embeddings = nn.Embedding(vocab_size, self.config.embed_size)
         self.embeddings.weight = nn.Parameter(word_embeddings, requires_grad=False)
         
-        # Convolutional Layer
-        # We use 3 kernels as in original paper: (3,300),(4,300),(5,300)
-        self.conv1 = nn.Conv2d(in_channels=self.config.in_channels, out_channels=self.config.num_channels,
-                               kernel_size=(self.config.kernel_size[0],self.config.embed_size),
-                               stride=1, padding=0)
-        self.activation1 = nn.ReLU()
-        self.max_out1 = nn.MaxPool1d(self.config.max_sen_len - self.config.kernel_size[0]+1)
-
-        self.conv2 = nn.Conv2d(in_channels=self.config.in_channels, out_channels=self.config.num_channels,
-                               kernel_size=(self.config.kernel_size[1],self.config.embed_size),
-                               stride=1, padding=0)
-        self.activation2 = nn.ReLU()
-        self.max_out2 = nn.MaxPool1d(self.config.max_sen_len - self.config.kernel_size[1]+1)
-        
-        self.conv3 = nn.Conv2d(in_channels=self.config.in_channels, out_channels=self.config.num_channels,
-                               kernel_size=(self.config.kernel_size[2],self.config.embed_size),
-                               stride=1, padding=0)
-        self.activation3 = nn.ReLU()
-        self.max_out3 = nn.MaxPool1d(self.config.max_sen_len - self.config.kernel_size[2]+1)
+        # This stackoverflow thread clarifies how conv1d works
+        # https://stackoverflow.com/questions/46503816/keras-conv1d-layer-parameters-filters-and-kernel-size/46504997
+        self.conv1 = nn.Sequential(
+            nn.Conv1d(in_channels=self.config.embed_size, out_channels=self.config.num_channels, kernel_size=self.config.kernel_size[0]),
+            nn.ReLU(),
+            nn.MaxPool1d(self.config.max_sen_len - self.config.kernel_size[0]+1)
+        )
+        self.conv2 = nn.Sequential(
+            nn.Conv1d(in_channels=self.config.embed_size, out_channels=self.config.num_channels, kernel_size=self.config.kernel_size[1]),
+            nn.ReLU(),
+            nn.MaxPool1d(self.config.max_sen_len - self.config.kernel_size[1]+1)
+        )
+        self.conv3 = nn.Sequential(
+            nn.Conv1d(in_channels=self.config.embed_size, out_channels=self.config.num_channels, kernel_size=self.config.kernel_size[2]),
+            nn.ReLU(),
+            nn.MaxPool1d(self.config.max_sen_len - self.config.kernel_size[2]+1)
+        )
         
         self.dropout = nn.Dropout(self.config.dropout_keep)
         
@@ -44,22 +42,14 @@ class TextCNN(nn.Module):
         
     def forward(self, x):
         # x.shape = (max_sen_len, batch_size)
-        embedded_sent = self.embeddings(x).permute(1,0,2).unsqueeze(1)
-        # embedded_sent.shape = (batch_size=64,1,max_sen_len=20,embed_size=300)
+        embedded_sent = self.embeddings(x).permute(1,2,0)
+        # embedded_sent.shape = (batch_size=64,embed_size=300,max_sen_len=20)
         
-        conv_out1 = self.conv1(embedded_sent).squeeze(3) #shape=(64, num_channels, 20-3+1, 1) (squeeze 1)
-        activation_out1 = self.activation1(conv_out1)
-        max_out1 = self.max_out1(activation_out1).squeeze(2) #shape=(64, num_channels, 1) (squeeze 1)
+        conv_out1 = self.conv1(embedded_sent).squeeze(2) #shape=(64, num_channels, 1) (squeeze 1)
+        conv_out2 = self.conv2(embedded_sent).squeeze(2)
+        conv_out3 = self.conv3(embedded_sent).squeeze(2)
         
-        conv_out2 = self.conv2(embedded_sent).squeeze(3)
-        activation_out2 = self.activation2(conv_out2)
-        max_out2 = self.max_out2(activation_out2).squeeze(2)
-        
-        conv_out3 = self.conv3(embedded_sent).squeeze(3)
-        activation_out3 = self.activation3(conv_out3)
-        max_out3 = self.max_out3(activation_out3).squeeze(2)
-        
-        all_out = torch.cat((max_out1, max_out2, max_out3), 1)
+        all_out = torch.cat((conv_out1, conv_out2, conv_out3), 1)
         final_feature_map = self.dropout(all_out)
         final_out = self.fc(final_feature_map)
         return self.softmax(final_out)
