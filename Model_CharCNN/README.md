@@ -2,7 +2,8 @@
 This is the implementation of character-level CNNs as proposed in the paper [Character-level Convolutional Networks for Text
 Classification](https://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf).
 
-In CharCNN, input text is represented by a (*l_0*,*d*) matrix. Where *l_0* is the maximum sentence length and d is the dimensionality of character embedding. Following characters are used for character quantization:
+In CharCNN, input text is represented by a (*l_0*,*d*) matrix. Where *l_0* is the maximum sentence length and d is the dimensionality of character embedding.
+Following characters are used for character quantization:
 
 <p>abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’’’/\|_@#$%ˆ&* ̃‘+-=<>()[]{} </p>
 
@@ -22,8 +23,7 @@ Architecture of CharCNN has 9 layers: 6 convolutional layers and 3 fully-connect
 | 6 | 256 | 7 | 3 |
 
 The shape of output tensor after the last convolution layer is (*l_0* - 96) / 27. Please see comments in **model.py** for details.
-
-This is the input to first-fully connected layer, which has 256 output units (1024 in the original paper). Second-fully connected layer also has 256 output units. Number of output units in final fully-connected layer is determined by the problem.
+The output of final convolutional layer is the input to first-fully connected layer, which has 256 output units (1024 in the original paper). Second-fully connected layer also has 256 output units. Number of output units in final fully-connected layer is determined by the problem.
 
 ## Implementation Details (as in original paper)
 - ReLU activaion function
