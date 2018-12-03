@@ -34,7 +34,6 @@ This is the input to first-fully connected layer, which has 256 output units (10
 - Cross Entropy Loss is used
 
 ## Learnings from the Implementation
-- Negative Log Likelihood Loss doesn't work for CharCNN (Spent 2 days finding the bug in the code, that was not there)
-- Character-level CNN is very sensitive to the choice of Optimizer and learning rate (Choose carefully)
-- Overall performance is not better, if not worse, than other state of the art text classification methods
-- Takes longer to run than Word-level CNNs, RNNs and Seq2Seq models
+- Negative Log Likelihood Loss doesn't work for CharCNN (Spent 2 days finding the bug in the code, that was not there).
+- Character-level CNN is very sensitive to the choice of Optimizer and learning rate. A lot of parameter tuning is required.
+- Overall performance is not better, if not worse, than other state of the art text classification methods.
