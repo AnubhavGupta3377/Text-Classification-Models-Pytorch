@@ -4,7 +4,7 @@ Classification](https://papers.nips.cc/paper/5782-character-level-convolutional-
 
 In CharCNN, input text is represented by a (*l_0*,*d*) matrix. Where *l_0* is the maximum sentence length and d is the dimensionality of character embedding. Following characters are used for character quantization:
 
-<p>**abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’’’/\|_@#$%ˆ&* ̃‘+-=<>()[]{}**</p>
+<p>abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’’’/\|_@#$%ˆ&* ̃‘+-=<>()[]{} </p>
 
 ## Model Architecture
 ![CharCNN Architecture](images/CharCNN.png)
@@ -13,7 +13,7 @@ Architecture of CharCNN has 9 layers: 6 convolutional layers and 3 fully-connect
 
 
 | Layer | #Output Channels | Kernel | Pool |
-|----------------------------------------|
+|-------|------------------|--------|------|
 | 1 | 256 | 7 | 3 |
 | 2 | 256 | 3 | 3 |
 | 3 | 256 | 3 | N/A |
