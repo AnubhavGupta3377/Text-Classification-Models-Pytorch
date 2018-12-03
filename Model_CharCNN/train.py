@@ -27,9 +27,9 @@ if __name__=='__main__':
         model.cuda()
     model.train()
     optimizer = optim.Adam(model.parameters(), lr=config.lr)
-    NLLLoss = nn.CrossEntropyLoss()
+    loss_fn = nn.CrossEntropyLoss()
     model.add_optimizer(optimizer)
-    model.add_loss_op(NLLLoss)
+    model.add_loss_op(loss_fn)
     ##############################################################
     
     train_losses = []
