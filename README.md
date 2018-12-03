@@ -88,7 +88,7 @@ python train.py <path_to_training_file> <path_to_test_file>
   <tr>
     <td>CharCNN</td>
     <td>87.70</td>
-    <td>Mins</td>
+    <td>13.08 Mins</td>
     <td></td>
     <td></td>
   </tr>
