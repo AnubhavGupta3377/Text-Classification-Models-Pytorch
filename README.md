@@ -1,4 +1,4 @@
-# Text-Classification-Models
+# Text-Classification-Models-Pytorch
 Implementation of State-of-the-art Text Classification Models in Pytorch
 
 ## Current Model Implementations
