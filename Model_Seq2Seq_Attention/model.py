@@ -40,6 +40,9 @@ class Seq2SeqAttention(nn.Module):
         Input:
             rnn_output (batch_size, seq_len, num_directions * hidden_size): tensor representing hidden state for every word in the sentence
             final_hidden_state (batch_size, num_directions * hidden_size): final hidden state of the RNN
+            
+        Returns:
+            attention_output(batch_size, num_directions * hidden_size): attention output vector for the batch
         '''
         hidden_state = final_hidden_state.unsqueeze(2)
         attention_scores = torch.bmm(rnn_output, hidden_state).squeeze(2)
