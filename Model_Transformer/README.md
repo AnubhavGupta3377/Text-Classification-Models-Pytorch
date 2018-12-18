@@ -22,8 +22,11 @@ Here, I have implemented the Transformer network for text classification. Some p
 - A query *q*
 - Set of key-value (*k-v*) pairs to an output
 - Query, keys, values and output are all vectors
-- Output is weighted sum of values
+
+**Output:** </br>
+- Weighted sum of values
 - Weight of each value is computed using an inner product of query and corresponding key
+
 - Query and keys have dimensionality d<sub>k</sub>
 - Values have dimensionality d<sub>v</sub>
 
