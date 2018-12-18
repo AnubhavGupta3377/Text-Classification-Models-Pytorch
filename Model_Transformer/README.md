@@ -18,7 +18,9 @@ Here, I have implemented the Transformer network for text classification. Some p
 ![Model Architecture of Transformer](images/transformer_overview.png)
 
 ## Basic Building Block - Dot Product Attention
+
 **Inputs: **
+
 - A query *q*
 - Set of key-value (*k-v*) pairs to an output
 - Query, keys, values and output are all vectors
@@ -35,9 +37,9 @@ Here, I have implemented the Transformer network for text classification. Some p
 ![](https://latex.codecogs.com/gif.latex?%24%24%20A%28Q%2CK%2CV%29%20%3D%20%5Ctext%7Bsoftmax%7D%20%28QK%5ET%29V%20%24%24)
 
 ### Scaled Dot-Product Attention
-**Problem:** As d<sub>k</sub> gets large, the variance of q<sup>T</sup>k increase
--> some values inside the softmax get large
--> the softmax gets very peaked
+**Problem:** As d<sub>k</sub> gets large, the variance of q<sup>T</sup>k increase</br>
+-> some values inside the softmax get large</br>
+-> the softmax gets very peaked</br>
 -> hence its gradient gets smaller
 
 **Solution:** Scale by length of query/key vectors.
