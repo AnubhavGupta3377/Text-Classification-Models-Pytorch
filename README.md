@@ -100,3 +100,14 @@ python train.py <path_to_training_file> <path_to_test_file>
     <td></td>
   </tr>
 </table>
+
+## References
+[1][Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)
+[2][Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)
+[3][Recurrent Convolutional Neural Networks for Text Classification](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/download/9745/9552)
+[4][Character-level Convolutional Networks for Text Classification](https://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf)
+[5][Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf)
+[6][Text Classification Research with Attention-based Recurrent Neural Networks](http://univagora.ro/jour/index.php/ijccc/article/download/3142/pdf)
+[7][Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+[8][Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/pdf/1705.03122.pdf)
+[9][Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf)
