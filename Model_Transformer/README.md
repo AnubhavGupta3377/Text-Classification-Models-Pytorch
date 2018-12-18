@@ -25,8 +25,7 @@ Here, I have implemented the Transformer network for text classification. Some p
 
 **Output:** </br>
 - Weighted sum of values
-- Weight of each value is computed using an inner product of query and corresponding key
-
+- Weight of each value is computed using an inner product of query and corresponding key</br>
 - Query and keys have dimensionality d<sub>k</sub>
 - Values have dimensionality d<sub>v</sub>
 
