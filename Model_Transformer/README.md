@@ -18,9 +18,7 @@ Here, I have implemented the Transformer network for text classification. Some p
 ![Model Architecture of Transformer](images/transformer_overview.png)
 
 ## Basic Building Block - Dot Product Attention
-
-**Inputs: **
-
+**Inputs:** </br>
 - A query *q*
 - Set of key-value (*k-v*) pairs to an output
 - Query, keys, values and output are all vectors
