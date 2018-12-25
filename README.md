@@ -111,4 +111,4 @@ python train.py <path_to_training_file> <path_to_test_file>
 [7] [Attention Is All You Need](https://arxiv.org/abs/1706.03762) </br>
 [8] [Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/pdf/1705.03122.pdf) </br>
 [9] [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf) </br>
-[10] [Identifying Well-formed Natural Language Questions] (https://arxiv.org/pdf/1808.09419.pdf) <br>
+[10] [Identifying Well-formed Natural Language Questions](https://arxiv.org/pdf/1808.09419.pdf) <br>
