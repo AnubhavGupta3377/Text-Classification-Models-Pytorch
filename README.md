@@ -66,7 +66,7 @@ python train.py <path_to_training_file> <path_to_test_file>
   </tr>
   <tr>
     <td>TextRNN</td>
-    <td>88.07 (Sequence length = 20) <br/> 90.43 (Flexible sequence length)</td>
+    <td>88.07 (Seq len = 20) <br/> 90.43 (Flexible seq len)</td>
     <td>21.5 Mins <br/> 36.8 Mins</td>
     <td>68.29 <br/> 66.29</td>
     <td>7.69 Mins <br/> 7.25 Mins</td>
