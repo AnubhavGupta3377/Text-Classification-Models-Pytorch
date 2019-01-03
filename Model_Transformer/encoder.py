@@ -15,7 +15,7 @@ class Encoder(nn.Module):
         self.layers = clones(layer, N)
         self.norm = LayerNorm(layer.size)
         
-    def forward(self, x, mask):
+    def forward(self, x, mask=None):
         for layer in self.layers:
             x = layer(x, mask)
         return self.norm(x)
@@ -34,7 +34,7 @@ class EncoderLayer(nn.Module):
         self.sublayer_output = clones(SublayerOutput(size, dropout), 2)
         self.size = size
 
-    def forward(self, x, mask):
+    def forward(self, x, mask=None):
         "Transformer Encoder"
         x = self.sublayer_output[0](x, lambda x: self.self_attn(x, x, x, mask)) # Encoder self-attention
         return self.sublayer_output[1](x, self.feed_forward)
