@@ -1,7 +1,7 @@
 # Text-Classification-Models-Pytorch
 Implementation of State-of-the-art Text Classification Models in Pytorch
 
-## Current Model Implementations
+## Implemented Models
 - **fastText:** fastText Model from [Bag of Tricks for Efficient Text Classification](https://arxiv.org/abs/1607.01759)
 - **TextCNN:** CNN for text classification proposed in [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)
 - **TextRNN:** Bi-direction LSTM network for text classification
@@ -9,9 +9,6 @@ Implementation of State-of-the-art Text Classification Models in Pytorch
 - **CharCNN:** Implementation of character-level CNNs as proposed in the paper [Character-level Convolutional Networks for Text Classification](https://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf)
 - **Seq2seq With Attention:** Implementation of seq2seq model with attention from [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf), [Text Classification Research with Attention-based Recurrent Neural Networks](http://univagora.ro/jour/index.php/ijccc/article/download/3142/pdf)
 - **Transformer:** Implementation of Transformer model proposed in [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
-
-## Upcoming Models
-- **Hierarchical Attention:** Implementation of hierarchical attention model for text classification as proposed in [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf)
 
 ## Requirements
 - Python-3.5.0
@@ -110,5 +107,4 @@ python train.py <path_to_training_file> <path_to_test_file>
 [6] [Text Classification Research with Attention-based Recurrent Neural Networks](http://univagora.ro/jour/index.php/ijccc/article/download/3142/pdf) </br>
 [7] [Attention Is All You Need](https://arxiv.org/abs/1706.03762) </br>
 [8] [Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/pdf/1705.03122.pdf) </br>
-[9] [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf) </br>
-[10] [Identifying Well-formed Natural Language Questions](https://arxiv.org/pdf/1808.09419.pdf) <br>
+[9] [Identifying Well-formed Natural Language Questions](https://arxiv.org/pdf/1808.09419.pdf) <br>
